@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="CleanArchNF-eDomain/CleanArchNFeDomain.csproj" />
+  <Project Path="CleanArchNFeApplication/CleanArchNFeApplication.csproj" Id="f7ddc628-326c-4c40-902d-ddb8345cc2ed" />
+  <Project Path="CleanArchNFeInfraData/CleanArchNFeInfraData.csproj" />
+  <Project Path="CleanArchNFeInfrIoC/CleanArchNFeInfraIoC.csproj" />
+  <Project Path="CleanArchNFeTests/CleanArchNFeTests.csproj" Id="b133f75e-5094-4a06-8339-15fc8cc4fda6" />
+  <Project Path="CleanArchWebUINFe/CleanArchWebUiNFe.csproj" />
+</Solution>
