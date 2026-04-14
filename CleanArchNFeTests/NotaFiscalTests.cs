@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CleanArchNF_eDomain.Entities;
+using CleanArchNFeDomain.Entities;
 using CleanArchNF_eDomain.Enums;
 using CleanArchNF_eDomain.Validation;
 using FluentAssertions;

@@ -1,5 +1,5 @@
 ﻿using System;
-using CleanArchNF_eDomain.Entities;
+using CleanArchNFeDomain.Entities;
 using CleanArchNF_eDomain.Validation;
 using FluentAssertions;
 using Xunit;

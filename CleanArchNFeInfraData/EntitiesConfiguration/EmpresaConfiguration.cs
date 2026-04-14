@@ -1,4 +1,4 @@
-﻿using CleanArchNF_eDomain.Entities;
+﻿using CleanArchNFeDomain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

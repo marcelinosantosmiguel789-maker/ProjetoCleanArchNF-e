@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchNF_eDomain.Entities;
+using CleanArchNFeDomain.Entities;
+using CleanArchNF_eDomain.Validation;
 
 namespace CleanArchNF_eDomain.Interfaces
 {
     public interface ICliente
-    { 
+    {
         Task<Cliente> ObterClientePorId(int idCliente);
         Task<IEnumerable<Cliente>> ObterClientesPorNome(string nome);
         Task<string> ObterNomeCliente(int idCliente);
@@ -17,6 +18,7 @@ namespace CleanArchNF_eDomain.Interfaces
         Task AdicionarCliente(string documento, string nome, string endereco);
         Task AtualizarCliente(int idCliente, string documento, string nome, string endereco);
         Task RemoverCliente(int idCliente);
+        Task <IEnumerable<Cliente>> ObterTodosClientes();
 
 
     }

@@ -20,6 +20,7 @@ namespace CleanArchNFeInfraIoC
 
             services.AddScoped<ICliente, ClienteRepository>();
             services.AddScoped<IEmpresa, EmpresaRepository>();
+            services.AddScoped<CleanArchNF_eDomain.Interfaces.IEmpresaRepository, EmpresaRepository>();
             services.AddScoped<INotaFiscal, NotaFiscalRepository>();
             services.AddScoped<IItemNotaFiscal, ItemNotaFiscalRepository>();
 

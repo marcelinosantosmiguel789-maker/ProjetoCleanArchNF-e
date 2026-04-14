@@ -7,18 +7,26 @@ using CleanArchNF_eDomain.Interfaces;
 using CleanArchNFeInfraData.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CleanArchNF_eDomain.Entities;
+using CleanArchNFeDomain.Entities;
 using CleanArchNF_eDomain.Enums;
 
 namespace CleanArchNFeInfraData.Repository
 
 {
-    public class NotaFiscalRepository : INotaFiscal
+    public class NotaFiscalRepository : INotaFiscal, CleanArchNF_eDomain.Interfaces.INotaFiscalRepository
     {
         ApplicationDbContext _notaFiscalContext;
         public NotaFiscalRepository(ApplicationDbContext context)
         {
             _notaFiscalContext = context;
+        }
+        public async Task<NotaFiscal> ObterNotaPorIdAsync(int idNotaFiscal)
+        {
+            return await _notaFiscalContext.NotasFiscais
+                .Include(n => n.Itens)
+                .Include(n => n.Cliente)
+                .Include(n => n.Empresa)
+                .FirstOrDefaultAsync(n => n.Id == idNotaFiscal);
         }
         public async Task AdicionarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item)
         {
@@ -32,7 +40,8 @@ namespace CleanArchNFeInfraData.Repository
             }
         }
 
-        public async Task AtualizarClientNotaAsync(int idNotaFiscal, Cliente cliente)
+        // new name to match repository interface
+        public async Task AtualizarClienteNotaAsync(int idNotaFiscal, Cliente cliente)
         {
             var nota = await _notaFiscalContext.NotasFiscais
                 .FirstOrDefaultAsync(n => n.Id == idNotaFiscal);
@@ -42,6 +51,10 @@ namespace CleanArchNFeInfraData.Repository
                 await _notaFiscalContext.SaveChangesAsync();
             }
         }
+
+        // keep old name for compatibility
+        public Task AtualizarClientNotaAsync(int idNotaFiscal, Cliente cliente)
+            => AtualizarClienteNotaAsync(idNotaFiscal, cliente);
 
         public async Task AtualizarEmpresaNotaAsync(int idNotaFiscal, Empresa empresa)
         {
@@ -54,7 +67,7 @@ namespace CleanArchNFeInfraData.Repository
             }
         }
 
-        public async Task atualizarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item)
+        public async Task AtualizarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item)
         {
             var nota = await _notaFiscalContext.NotasFiscais
                 .Include(n => n.Itens)
@@ -65,6 +78,10 @@ namespace CleanArchNFeInfraData.Repository
                 await _notaFiscalContext.SaveChangesAsync();
             }
         }
+
+        // compatibility lowercase method
+        public Task atualizarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item)
+            => AtualizarItemNotaAsync(idNotaFiscal, item);
 
         public async Task AtualizarNumeroAsync(int idNotaFiscal, int numero)
         {

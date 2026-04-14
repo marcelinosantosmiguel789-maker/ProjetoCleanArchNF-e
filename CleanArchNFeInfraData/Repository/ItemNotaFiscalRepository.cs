@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchNF_eDomain.Entities;
+using CleanArchNFeDomain.Entities;
 using CleanArchNF_eDomain.Interfaces;
 using CleanArchNFeInfraData.Context;
 using Microsoft.EntityFrameworkCore;
@@ -21,14 +21,20 @@ namespace CleanArchNFeInfraData.Repository
 
         public async Task AdicionarItemNotaFiscal(int idProduto, int quantidade, decimal valorUnitario)
         {
-            _itemNotaContext.itensNotaFiscal.Add(new ItemNotaFiscal
-            {
-                ProdutoId = idProduto,
-                Quantidade = quantidade,
-                ValorUnitario = valorUnitario
-            });
+            var nota = await _itemNotaContext.NotasFiscais
+        .Include(n => n.Itens)
+        .FirstOrDefaultAsync(n => n.Id == idProduto);
+
+            if (nota == null)
+                throw new Exception("Nota fiscal não encontrada");
+
+            var item = new ItemNotaFiscal(idProduto, quantidade, valorUnitario);
+
+            nota.Itens.Add(item);
+
             await _itemNotaContext.SaveChangesAsync();
         }
+
 
         public async Task AtualizarItemNotaFiscal(int idProduto, int quantidade, decimal valorUnitario)
         {

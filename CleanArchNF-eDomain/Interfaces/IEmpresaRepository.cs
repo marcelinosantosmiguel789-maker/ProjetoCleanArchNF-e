@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using CleanArchNFeDomain.Entities;
 
 namespace CleanArchNF_eDomain.Interfaces
 {
-    public interface IEmpresa
+    public interface IEmpresaRepository
     {
         Task<List<Empresa>> ObterEmpresas();
         Task<Empresa> ObterEmpresaPorId(int idEmpresa);
@@ -15,8 +15,8 @@ namespace CleanArchNF_eDomain.Interfaces
         Task<string> ObterNomeEmpresa(int idEmpresa);
         Task<string> ObterDocumentoEmpresa(int idEmpresa);
         Task<string> ObterEnderecoEmpresa(int idEmpresa);
-        Task AdicionarEmpresa(string documento, string nome, string endereco);
-        Task AtualizarEmpresa(int idEmpresa, string documento, string nome, string endereco);
+        Task AdicionarEmpresa(Empresa empresa);
+        Task AtualizarEmpresa(Empresa empresa);
         Task RemoverEmpresa(int idEmpresa);
     }
 }

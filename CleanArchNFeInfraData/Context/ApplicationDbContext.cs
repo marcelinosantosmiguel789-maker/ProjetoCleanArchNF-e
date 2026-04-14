@@ -1,4 +1,4 @@
-﻿using CleanArchNF_eDomain.Entities;
+﻿using CleanArchNFeDomain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

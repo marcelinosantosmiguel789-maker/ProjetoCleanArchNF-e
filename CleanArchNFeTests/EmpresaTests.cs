@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchNF_eDomain.Entities;
+using CleanArchNFeDomain.Entities;
 using CleanArchNF_eDomain.Validation;
 using FluentAssertions;
 

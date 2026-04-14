@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CleanArchNF_eDomain.Enums;
 using CleanArchNF_eDomain.Validation;
 
-namespace CleanArchNF_eDomain.Entities
+namespace CleanArchNFeDomain.Entities
 {
     public sealed class NotaFiscal : Entity
     {

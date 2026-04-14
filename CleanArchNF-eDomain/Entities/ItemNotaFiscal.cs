@@ -1,16 +1,23 @@
 ﻿using CleanArchNF_eDomain.Validation;
 
-namespace CleanArchNF_eDomain.Entities
+namespace CleanArchNFeDomain.Entities
 {
     public sealed class ItemNotaFiscal : Entity
     {
+        public ItemNotaFiscal() { }
         public int ProdutoId { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
         public decimal ValorUnitario { get; set; }
         public decimal Total { get; set; }
         public decimal ValorImpostos { get; set; }
-        public ItemNotaFiscal() { }
+        public ItemNotaFiscal(int produtoId, int quantidade, decimal valorUnitario)
+        {
+            ProdutoId = produtoId;
+            Quantidade = quantidade;
+            ValorUnitario = valorUnitario;
+            Total = quantidade * valorUnitario;
+        }
 
         public ItemNotaFiscal(int produtoId, string descricao, int quantidade, decimal valorUnitario, decimal valorImpostos)
         {

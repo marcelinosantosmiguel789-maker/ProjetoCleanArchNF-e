@@ -11,8 +11,4 @@
     <Folder Include="ValueObject\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CleanArchNFeApplication\CleanArchNFeApplication.csproj" />
-  </ItemGroup>
-
 </Project>

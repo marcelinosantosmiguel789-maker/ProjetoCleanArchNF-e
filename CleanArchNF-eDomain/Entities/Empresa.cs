@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using CleanArchNF_eDomain.Validation;
 
-namespace CleanArchNF_eDomain.Entities
+namespace CleanArchNFeDomain.Entities
 {
     public sealed class Empresa : Entity
     {
         public string Cnpj { get; set; }
         public string RazaoSocial { get;  set; }
+        // compatibility properties used by repositories and interfaces
+        public string Documento { get => Cnpj; set => Cnpj = value; }
+        public string Nome { get => RazaoSocial; set => RazaoSocial = value; }
         public string Endereco { get; set; }
         public Empresa() { }
 

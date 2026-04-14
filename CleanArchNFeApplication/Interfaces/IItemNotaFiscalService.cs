@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CleanArchNFeDomain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchNFeDomain.Entities;
 
-namespace CleanArchNF_eDomain.Interfaces
+namespace CleanArchNFeApplication.Interfaces
 {
-    public interface IItemNotaFiscal
+    public interface IItemNotaFiscalService
     {
         Task<List<ItemNotaFiscal>> ObterItensNotaFiscal(int idNotaFiscal);
         Task<IEnumerable<ItemNotaFiscal>> ObterTodosItensNotaFiscal();

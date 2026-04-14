@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchNF_eDomain.Entities
+namespace CleanArchNFeDomain.Entities
 {
     public sealed class Cliente : Entity
     {
@@ -23,6 +23,14 @@ namespace CleanArchNF_eDomain.Entities
             ValidateEndereco(endereco);
         }
         public Cliente() {}
+
+        // Method used by repository to update entity values
+        public void Atualizar(string documento, string nome, string endereco)
+        {
+            ValidateDocumento(documento);
+            ValidateNome(nome);
+            ValidateEndereco(endereco);
+        }
 
 
         private void ValidateNome(string nome)
