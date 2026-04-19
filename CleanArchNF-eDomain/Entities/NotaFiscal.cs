@@ -90,5 +90,26 @@ namespace CleanArchNFeDomain.Entities
 
            DataEmissao = dataEmissao;
         }
+
+        // Aggregate operations
+        public void AdicionarItem(ItemNotaFiscal item)
+        {
+            NFeExceptionValidation.When(item == null, "Item é obrigatório");
+            if (Itens == null) Itens = new List<ItemNotaFiscal>();
+            Itens.Add(item);
+            CalcularTotal();
+        }
+
+        public void RemoverItemPorProduto(int produtoId)
+        {
+            if (Itens == null || !Itens.Any())
+                throw new NFeExceptionValidation("A nota fiscal não possui itens");
+
+            var item = Itens.FirstOrDefault(i => i.ProdutoId == produtoId);
+            NFeExceptionValidation.When(item == null, "Item não encontrado na nota fiscal");
+
+            Itens.Remove(item);
+            CalcularTotal();
+        }
     }
 }

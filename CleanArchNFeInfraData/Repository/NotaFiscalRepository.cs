@@ -30,13 +30,11 @@ namespace CleanArchNFeInfraData.Repository
         }
         public async Task AdicionarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item)
         {
-            var nota = await _notaFiscalContext.NotasFiscais
-                .Include(n => n.Itens)
-                .FirstOrDefaultAsync(n => n.Id == idNotaFiscal);
+            var nota = await ObterNotaPorIdAsync(idNotaFiscal);
             if (nota != null)
             {
-                nota.Itens.Add(item);
-                await _notaFiscalContext.SaveChangesAsync();
+                nota.AdicionarItem(item);
+                await SalvarNotaAsync(nota);
             }
         }
 
@@ -69,13 +67,12 @@ namespace CleanArchNFeInfraData.Repository
 
         public async Task AtualizarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item)
         {
-            var nota = await _notaFiscalContext.NotasFiscais
-                .Include(n => n.Itens)
-                .FirstOrDefaultAsync(n => n.Id == idNotaFiscal);
+            var nota = await ObterNotaPorIdAsync(idNotaFiscal);
             if (nota != null)
             {
-                nota.Itens.Add(item);
-                await _notaFiscalContext.SaveChangesAsync();
+                // domain should decide how to update an item; here we add for simplicity
+                nota.AdicionarItem(item);
+                await SalvarNotaAsync(nota);
             }
         }
 
@@ -190,19 +187,19 @@ namespace CleanArchNFeInfraData.Repository
 
         public async Task RemoverItemNotaAsync(int idNotaFiscal, int idProduto)
         {
-            var nota = await _notaFiscalContext.NotasFiscais
-                  .Include(n => n.Itens)
-                  .FirstOrDefaultAsync(n => n.Id == idNotaFiscal);
+            var nota = await ObterNotaPorIdAsync(idNotaFiscal);
             if (nota != null)
             {
-                var item = nota.Itens.FirstOrDefault(i => i.ProdutoId == idProduto);
-                if (item != null)
-                {
-                    nota.Itens.Remove(item);
-                    await _notaFiscalContext.SaveChangesAsync();
-                }
-
+                nota.RemoverItemPorProduto(idProduto);
+                await SalvarNotaAsync(nota);
             }
+        }
+
+        public async Task SalvarNotaAsync(NotaFiscal nota)
+        {
+            if (nota == null) throw new ArgumentNullException(nameof(nota));
+            _notaFiscalContext.NotasFiscais.Update(nota);
+            await _notaFiscalContext.SaveChangesAsync();
         }
     }
 }

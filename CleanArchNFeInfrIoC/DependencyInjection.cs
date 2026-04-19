@@ -1,11 +1,11 @@
-﻿using CleanArchNFeInfraData.Context;
-using CleanArchNFeInfraData.Repository;
-using CleanArchNF_eDomain.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using CleanArchNFeInfraData.Context;
+using CleanArchNF_eDomain.Interfaces;
+using CleanArchNFeInfraData.Repository;
 
-namespace CleanArchNFeInfraIoC
+namespace CleanArchNFeInfrIoC
 {
     public static class DependencyInjection
     {
@@ -22,7 +22,12 @@ namespace CleanArchNFeInfraIoC
             services.AddScoped<IEmpresa, EmpresaRepository>();
             services.AddScoped<CleanArchNF_eDomain.Interfaces.IEmpresaRepository, EmpresaRepository>();
             services.AddScoped<INotaFiscal, NotaFiscalRepository>();
+            services.AddScoped<CleanArchNF_eDomain.Interfaces.INotaFiscalRepository, NotaFiscalRepository>();
             services.AddScoped<IItemNotaFiscal, ItemNotaFiscalRepository>();
+
+            // Application services
+            services.AddScoped<CleanArchNFeApplication.Interfaces.INotaFiscalService, CleanArchNFeApplication.Services.NotaFiscalService>();
+            services.AddScoped<CleanArchNFeApplication.Interfaces.IItemNotaFiscalService, CleanArchNFeApplication.Services.ItemNotaFiscalService>();
 
             return services;
         }

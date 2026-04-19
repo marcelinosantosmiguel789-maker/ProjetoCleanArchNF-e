@@ -1,21 +1,13 @@
-﻿using CleanArchNFeDomain.Entities;
-using System;
+﻿using CleanArchNFeApplication.DTOs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CleanArchNFeApplication.Interfaces
 {
     public interface IItemNotaFiscalService
     {
-        Task<List<ItemNotaFiscal>> ObterItensNotaFiscal(int idNotaFiscal);
-        Task<IEnumerable<ItemNotaFiscal>> ObterTodosItensNotaFiscal();
-        Task<IEnumerable<ItemNotaFiscal>> ObterItensNotaFiscalPorProduto(int idProduto);
-        Task AdicionarItemNotaFiscal(int idProduto, int quantidade, decimal valorUnitario);
-        Task<decimal> CalcularValorTotalItemNotaFiscal(int idProduto);
-        Task<decimal> CalcularTotalItemNotaFiscal(int idProduto);
-        Task AtualizarItemNotaFiscal(int idProduto, int quantidade, decimal valorUnitario);
-        Task RemoverItemNotaFiscal(int idProduto);
+        Task AdicionarItemNotaAsync(int idNotaFiscal, ItemNotaFiscalDTO itemDto);
+        Task<IEnumerable<ItemNotaFiscalDTO>> ObterItensNotaAsync(int idNotaFiscal);
+        Task RemoverItemNotaAsync(int idNotaFiscal, int idProduto);
     }
 }

@@ -11,6 +11,7 @@ namespace CleanArchNF_eDomain.Interfaces
     public interface INotaFiscalRepository
     {
         Task<NotaFiscal> ObterNotaPorIdAsync(int idNotaFiscal);
+        Task SalvarNotaAsync(NotaFiscal nota);
         Task AdicionarItemNotaAsync(int idNotaFiscal, ItemNotaFiscal item);
         Task AtualizarClienteNotaAsync(int idNotaFiscal, Cliente cliente);
         Task AtualizarEmpresaNotaAsync(int idNotaFiscal, Empresa empresa);
